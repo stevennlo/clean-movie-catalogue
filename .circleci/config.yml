@@ -32,6 +32,9 @@ jobs:
           path: app/build/reports
           destination: reports
       - run:
+          name: Connected Check
+          command: ./gradlew connectedCheck
+      - run:
           name: Run Tests
           command: ./gradlew lint test
       - store_test_results:
