@@ -26,6 +26,7 @@ buildscript {
         leakCanaryVersion = "2.7"
         zeteticSqlcipherVersion = "4.4.3"
         sqliteVersion = "2.1.0"
+        jacocoVersion = "0.8.7"
     }
     repositories {
         google()
@@ -38,6 +39,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationKtxVersion"
         classpath "com.apollographql.apollo:apollo-gradle-plugin:$apolloVersion"
+        classpath "org.jacoco:org.jacoco.core:$jacocoVersion"
     }
 }
 

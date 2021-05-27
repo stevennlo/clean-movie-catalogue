@@ -26,7 +26,7 @@ jobs:
           name: Run Build
           command: ./gradlew build
       - codecov/upload:
-          file: './coverage/clover.xml'
+          file: app/build/reports/coverage/debug/report.xml
           token: 5e0e42d0-ced5-48f9-9a43-4581dc302cde
       - store_artifacts:
           path: app/build/reports
