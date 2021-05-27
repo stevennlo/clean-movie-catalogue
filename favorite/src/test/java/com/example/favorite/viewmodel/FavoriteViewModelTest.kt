@@ -36,7 +36,7 @@ class FavoriteViewModelTest {
         viewModel.medias.observeForever(observer)
         viewModel.getMediasFavorite(getMediaFormat())
         verify {
-            observer.onChanged(medias)
+            observer.onChanged(null)
         }
     }
 }
