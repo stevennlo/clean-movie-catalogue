@@ -28,8 +28,17 @@ jobs:
           path: app/build/reports
           destination: reports
       - run:
-          name: Run Tests
+          name: Run LintTests
           command: ./gradlew lint test
+      - run:
+          name: Run CoreUnitTest
+          command: ./gradlew core:testDebug
+      - run:
+          name: Run AppUnitTest
+          command: ./gradlew app:testDebug
+      - run:
+          name: Run FavoriteUnitTest
+          command: ./gradlew favorite:testDebug
       - store_test_results:
           path: app/build/test-results
       - store_artifacts:  
