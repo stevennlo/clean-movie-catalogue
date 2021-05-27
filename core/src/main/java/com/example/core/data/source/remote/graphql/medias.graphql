@@ -1,0 +1,20 @@
+query Medias($format: MediaFormat!) {
+    Page {
+        media (type: ANIME, sort: [FAVOURITES_DESC], isAdult: false, format: $format) {
+            id
+            title {
+                romaji
+            }
+            coverImage {
+                large
+            }
+            format
+            episodes
+            description
+            bannerImage
+            duration
+            averageScore
+            favourites
+        }
+    }
+}
