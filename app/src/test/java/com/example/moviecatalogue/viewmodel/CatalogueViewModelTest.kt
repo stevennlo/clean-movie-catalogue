@@ -9,8 +9,13 @@ import com.example.core.util.getOrAwaitValue
 import com.example.moviecatalogue.util.DummyData.getKeyword
 import com.example.moviecatalogue.util.DummyData.getMediaFormat
 import com.example.moviecatalogue.util.DummyData.getMedias
-import io.mockk.*
-import kotlinx.coroutines.*
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.spyk
+import io.mockk.unmockkAll
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -47,31 +52,16 @@ class CatalogueViewModelTest {
         val observer = spyk<Observer<Resource<List<Media>>>>()
         viewModel.medias.observeForever(observer)
         viewModel.queryChannel.trySend(keyword)
-        runBlocking {
-            delay(400)
-            verify {
-                observer.onChanged(medias)
-            }
-        }
+        assertEquals(medias, viewModel.medias.getOrAwaitValue())
     }
 
     @Test
     fun testRefreshSearch() {
         viewModel.setSearchFormat(format)
-        val observer = spyk<Observer<Resource<List<Media>>>>()
-        viewModel.medias.observeForever(observer)
         viewModel.queryChannel.trySend(keyword)
-        runBlocking {
-            delay(400)
-            verify {
-                observer.onChanged(medias)
-            }
-            viewModel.refreshSearch()
-            delay(400)
-            verify {
-                observer.onChanged(medias)
-            }
-        }
+        assertEquals(medias, viewModel.medias.getOrAwaitValue())
+        viewModel.refreshSearch()
+        assertEquals(medias, viewModel.medias.getOrAwaitValue())
     }
 
     @Test
